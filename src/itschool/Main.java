@@ -20,14 +20,14 @@ public class Main {
         System.out.println(jsonString);
 
         // Считываем json
-        Object obj = null; // Object obj = new JSONParser().parse(new FileReader("JSONExample.json"));
+        Object obj = null;
         try {
             obj = new JSONParser().parse(jsonString);
         } catch (ParseException e) {
             e.printStackTrace();
         }
         System.out.println();
-// Кастим obj в JSONObject
+
         JSONArray jsonArray = (JSONArray) obj;
         System.out.println(jsonArray.toJSONString());
         System.out.println();
@@ -35,7 +35,6 @@ public class Main {
         Rates rates = new Rates();
 
         for (Object jsonObject : jsonArray) {
-            //System.out.println(jsonObject);
             JSONObject current = (JSONObject) jsonObject;
             String ccy = (String) current.get("ccy");
             String base_ccy = (String) current.get("base_ccy");
@@ -45,38 +44,23 @@ public class Main {
             rates.add(currency);
         }
 
+        System.out.println("Imported data after parsing:\n" + rates);
         System.out.println(rates);
+
         rates.getRates().sort(Currency.byNameAsc);
-        System.out.println(rates);
+        System.out.println("After sorting by name ascending:\n" + rates);
         rates.getRates().sort(Currency.byNameDesc);
-        System.out.println(rates);
+        System.out.println("After sorting by name descending:\n" + rates);
 
         rates.getRates().sort(Currency.byValueAsc);
-        System.out.println(rates);
+        System.out.println("After sorting by Buy value ascending:\n" + rates);
         rates.getRates().sort(Currency.byValueDesc);
-        System.out.println(rates);
+        System.out.println("After sorting by Buy value descending:\n" + rates);
 
         Rates withUR = rates.filterByCCY("UR");
-        System.out.println("with UR:" + withUR);
+        System.out.println("Filtered data with 'UR' in title:" + withUR);
 
         Rates withUSD = rates.filterByCCY("USD");
-        System.out.println("with USD:" + withUSD);
-
-  /*
-// Достаём firstName and lastName
-        String firstName = (String) jo.get("ccy");
-        String lastName = (String) jo.get("baseCcy");
-        System.out.println("fio: " + firstName + " " + lastName);
-
-// Достаем массив номеров
-        JSONArray phoneNumbersArr = (JSONArray) jo.get("phoneNumbers");
-        Iterator phonesItr = phoneNumbersArr.iterator();
-        System.out.println("phoneNumbers:");
-// Выводим в цикле данные массива
-        while (phonesItr.hasNext()) {
-            JSONObject test = (JSONObject) phonesItr.next();
-            System.out.println("- type: " + test.get("type") + ", phone: " + test.get("number"));
-        }
-*/
+        System.out.println("Filtered data with 'UR' in title:" + withUSD);
     }
 }

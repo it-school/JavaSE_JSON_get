@@ -10,19 +10,7 @@ public class Currency {
     private double buy;
     private double sale;
 
-    /**
-     * @param sale
-     * @param baseCcy
-     * @param buy
-     * @param ccy
-     */
-    public Currency(String ccy, String baseCcy, double buy, double sale) {
-        super();
-        this.ccy = ccy;
-        this.baseCcy = baseCcy;
-        this.buy = buy;
-        this.sale = sale;
-    }
+    public static Comparator<Currency> byNameAsc = Comparator.comparing(o -> o.ccy);
 
     public String getCcy() {
         return ccy;
@@ -56,12 +44,24 @@ public class Currency {
         this.sale = sale;
     }
 
-    @Override
-    public String toString() {
-        return ccy + " -> " + baseCcy + " [" + buy + ", " + sale + "]";
+    /**
+     * @param ccy     валюта исходная
+     * @param baseCcy валюта за которую покупаем
+     * @param buy     курс покупки
+     * @param sale    курс продажи
+     */
+    public Currency(String ccy, String baseCcy, double buy, double sale) {
+        super();
+        this.ccy = ccy;
+        this.baseCcy = baseCcy;
+        this.buy = buy;
+        this.sale = sale;
     }
 
-    public static Comparator<Currency> byNameAsc = (o1, o2) -> o1.ccy.compareTo(o2.ccy);
+    @Override
+    public String toString() {
+        return ccy + " -> " + baseCcy + " [buy: " + buy + ", sale: " + sale + "]";
+    }
     public static Comparator<Currency> byNameDesc = (o1, o2) -> o2.ccy.compareTo(o1.ccy);
     public static Comparator<Currency> byValueAsc = (o1, o2) -> o1.buy > o2.buy ? 1 : o1.buy < o2.buy ? -1 : 0;
     public static Comparator<Currency> byValueDesc = (o1, o2) -> o1.buy < o2.buy ? 1 : o1.buy > o2.buy ? -1 : 0;

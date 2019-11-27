@@ -28,18 +28,16 @@ public class Rates {
 
     @Override
     public String toString() {
-        String result = "Rates (" + (new Date()).toLocaleString () + ") "+System.lineSeparator();
+        String result = "Rates (" + (new Date()).toLocaleString() + ") " + System.lineSeparator();
         for (Currency c : rates) {
             result += c + System.lineSeparator();
         }
         return result;
     }
 
-    public Rates filterByCCY(String ccy)
-    {
+    public Rates filterByCCY(String ccy) {
         Rates tempRats = new Rates();
-        for (Currency currency : this.rates)
-        {
+        for (Currency currency : this.rates) {
             if (currency.getCcy().toLowerCase().contains(ccy.toLowerCase()))
                 tempRats.add(currency);
         }
