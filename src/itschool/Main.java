@@ -8,22 +8,27 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class Main {
+public class Main
+{
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         JSONGetter jsonGetter = new JSONGetter();
         JSONGetter.url = "https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5";
         jsonGetter.run();
 
-        System.out.println("Waining for data...");
+        System.out.println("Waiting for data...");
         String jsonString = jsonGetter.jsonIn;
         System.out.println(jsonString);
 
         // Считываем json
         Object obj = null;
-        try {
+        try
+        {
             obj = new JSONParser().parse(jsonString);
-        } catch (ParseException e) {
+        }
+        catch (ParseException e)
+        {
             e.printStackTrace();
         }
         System.out.println();
@@ -34,7 +39,8 @@ public class Main {
 
         Rates rates = new Rates();
 
-        for (Object jsonObject : jsonArray) {
+        for (Object jsonObject : jsonArray)
+        {
             JSONObject current = (JSONObject) jsonObject;
             String ccy = (String) current.get("ccy");
             String base_ccy = (String) current.get("base_ccy");
