@@ -10,8 +10,6 @@ public class Currency {
     private double buy;
     private double sale;
 
-    public static Comparator<Currency> byNameAsc = Comparator.comparing(o -> o.ccy);
-
     public String getCcy() {
         return ccy;
     }
@@ -59,9 +57,12 @@ public class Currency {
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return ccy + " -> " + baseCcy + " [buy: " + buy + ", sale: " + sale + "]";
     }
+
+    public static Comparator<Currency> byNameAsc = Comparator.comparing(o -> o.ccy);
     public static Comparator<Currency> byNameDesc = (o1, o2) -> o2.ccy.compareTo(o1.ccy);
     public static Comparator<Currency> byValueAsc = (o1, o2) -> o1.buy > o2.buy ? 1 : o1.buy < o2.buy ? -1 : 0;
     public static Comparator<Currency> byValueDesc = (o1, o2) -> o1.buy < o2.buy ? 1 : o1.buy > o2.buy ? -1 : 0;
